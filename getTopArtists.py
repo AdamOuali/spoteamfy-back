@@ -1,13 +1,12 @@
 import json
 from collections import Counter
 import logging
-from getNewToken import getNewToken
 from getFavoriteTracks import getFavoriteTracks
 
 
-def getTopArtists(n=20):
+def getTopArtists(token, n=20):
     try:
-        favorite_tracks = getFavoriteTracks()
+        favorite_tracks = getFavoriteTracks(token)
         artists = []
         for track in favorite_tracks:
             for artist in track["track"]["album"]["artists"]:

@@ -5,7 +5,6 @@
 import json
 import requests
 from collections import Counter
-from getNewToken import getNewToken
 from getFavoriteTracks import getFavoriteTracks
 import logging
 
@@ -19,10 +18,9 @@ def getAllTracksIDs():
     return tracks
 
 
-def getTopGenres():
+def getTopGenres(token):
     tracksIDs = getAllTracksIDs()
-    token = getNewToken()
-    headers = {"Authorization": f"Bearer {token}"}
+    headers = {"Authorization": f"{token}"}  # token is already "Bearer" + token
     allGenresFeatures = []
 
     for trackID in tracksIDs:

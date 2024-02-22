@@ -2,15 +2,16 @@ import requests
 import base64
 import json
 import logging
-from getNewToken import getNewToken
 
-token = getNewToken()
+# from getNewToken import getNewToken
+
+# token = getNewToken()
 
 
-def getFavoriteTracks(limit=50, offset=0):
+def getFavoriteTracks(token, limit=50, offset=0):
     tracks = []
     try:
-        token_headers = {"Authorization": f"Bearer {token}"}
+        token_headers = {"Authorization": f"{token}"}
         token_url = (
             f"https://api.spotify.com/v1/me/tracks?limit={limit}&offset={offset}"
         )
