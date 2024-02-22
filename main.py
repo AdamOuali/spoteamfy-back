@@ -6,6 +6,7 @@ from getFavoriteTracks import getFavoriteTracks
 from getTopArtists import getTopArtists
 from getTopGenres import getTopGenres
 from getFeatures import getFeatures
+from getClusterGraph import getClusterGraph
 from flask import request
 import logging
 
@@ -58,6 +59,16 @@ def cluster_genres():
     else:
         features = getFeatures(token)
     return jsonify(features)
+
+
+@app.route("/cluster-graph")
+def cluster_graph():
+    token = getTokenViaHeader(request)
+    if token is None:
+        return jsonify({"error": "No token provided"}), 400
+    else:
+        clusterGraph = getClusterGraph(token)
+    return clusterGraph
 
 
 # to run : python3 -m flask --app main run
