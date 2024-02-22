@@ -42,11 +42,10 @@ def top_artists(num_artists=None):
 @app.route("/top-genres")
 def top_genres():
     token = getTokenViaHeader(request)
-    logging.info(token)
     if token is None:
         return jsonify({"error": "No token provided"}), 400
     else:
-        genres = getTopGenres()
+        genres = getTopGenres(token)
     return jsonify(genres)
 
 
