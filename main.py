@@ -5,6 +5,7 @@ from flask_cors import CORS
 from getFavoriteTracks import getFavoriteTracks
 from getTopArtists import getTopArtists
 from getTopGenres import getTopGenres
+from getFeatures import getFeatures
 from flask import request
 import logging
 
@@ -49,9 +50,14 @@ def top_genres():
     return jsonify(genres)
 
 
-@app.route("/cluster-genres")
+@app.route("/cluster-features")
 def cluster_genres():
-    return "<p> TODO w/ AI </p>"
+    token = getTokenViaHeader(request)
+    if token is None:
+        return jsonify({"error": "No token provided"}), 400
+    else:
+        features = getFeatures(token)
+    return jsonify(features)
 
 
 # to run : python3 -m flask --app main run
