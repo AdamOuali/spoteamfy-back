@@ -22,14 +22,19 @@ def getArtistIDs(token):
 def getArtists(token, artist_ids):
     all_artists = []
 
-    for i in range(0, len(artist_ids), 50):
-        artists = requests.get(
-            f"https://api.spotify.com/v1/artists?ids={','.join(artist_ids[i:i+50])}",
-            headers={"Authorization": f"{token}"},
-        ).json()
+    try:
+        for i in range(0, len(artist_ids), 50):
+            artists = requests.get(
+                f"https://api.spotify.com/v1/artists?ids={','.join(artist_ids[i:i+50])}",
+                headers={"Authorization": f"{token}"},
+            ).json()
 
-        packOf50Artists = artists["artists"]
-        all_artists.append(packOf50Artists)
+            packOf50Artists = artists["artists"]
+            all_artists.append(packOf50Artists)
+    except Exception as e:
+        logging.error("An error occurred while getting artists", exc_info=True)
+        return {"error": "An error occurred"}
+
     return all_artists
 
 
