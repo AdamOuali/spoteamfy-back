@@ -50,8 +50,8 @@ def getTopGenres(token, n=20):
     top_genres_json = [
         {
             "rank": index + 1,
-            "genre": genre[0],
-            "count": genre[1],
+            "title": genre[0],
+            "value": genre[1],
         }
         for index, genre in enumerate(top_genres)
     ]
