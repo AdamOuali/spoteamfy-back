@@ -38,7 +38,7 @@ def getArtists(token, artist_ids):
     return all_artists
 
 
-def getTopGenres(token, n=20):
+def getTopGenres(token, n=8):
     all_artists = getArtists(token, getArtistIDs(token))
     genres = []
     for artists in all_artists:
